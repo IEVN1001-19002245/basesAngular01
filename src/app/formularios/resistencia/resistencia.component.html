@@ -1,0 +1,60 @@
+<h1>Calculadora de Resistencias</h1>
+
+<form>
+  <div class="form-group pt-3">
+    <label>Banda 1</label>
+    <div *ngFor="let c of ['negro','marron','rojo','naranja','amarillo','verde','azul','violeta','gris','blanco']">
+      <input [(ngModel)]="color1" name="color1" type="radio" [value]="c" />
+      {{c}}
+    </div>
+  </div>
+
+  <div class="form-group pt-3">
+    <label>Banda 2</label>
+    <div *ngFor="let c of ['negro','marron','rojo','naranja','amarillo','verde','azul','violeta','gris','blanco']">
+      <input [(ngModel)]="color2" name="color2" type="radio" [value]="c" />
+      {{c}}
+    </div>
+  </div>
+
+  <div class="form-group pt-3">
+    <label>Multiplicador</label>
+    <div *ngFor="let c of ['negro','marron','rojo','naranja','amarillo','verde','azul','dorado','plateado']">
+      <input [(ngModel)]="multiplicador" name="multiplicador" type="radio" [value]="c" />
+      {{c}}
+    </div>
+  </div>
+
+  <div class="form-group pt-3">
+    <label>Tolerancia</label>
+    <div *ngFor="let c of ['marron','rojo','verde','azul','violeta','gris','dorado','plateado']">
+      <input [(ngModel)]="tolerancia" name="tolerancia" type="radio" [value]="c" />
+      {{c}}
+    </div>
+  </div>
+
+  <div class="pt-4">
+    <button (click)="procesar()" type="button" class="btn btn-primary">Calcular</button>
+    <button (click)="limpiar()" type="button" class="btn btn-secondary">Limpiar</button>
+  </div>
+</form>
+
+<div class="pt-4" *ngIf="resultado">
+  <h3>Resultado:</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Valor</th>
+        <th>Máximo</th>
+        <th>Mínimo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ resultado.valor }}</td>
+        <td>{{ resultado.max }}</td>
+        <td>{{ resultado.min }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
