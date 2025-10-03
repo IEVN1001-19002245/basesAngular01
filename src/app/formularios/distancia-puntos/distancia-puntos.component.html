@@ -1,0 +1,47 @@
+<form>
+
+  <div class="form-group pt-3">
+    <label for="boletas">X1:</label>
+    <input
+      [(ngModel)]="equis1" name="x1" value="x1" type="text" 
+      class="form-control" id="compradores" 
+      placeholder="Ingrese la cantiad de compradores" 
+    />
+  </div>
+  <div class="form-group pt-3">
+    <label for="boletas">Y1:</label>
+    <input
+      [(ngModel)]="ye1" name="y1" value="y1" type="text" 
+      class="form-control" id="compradores" 
+      placeholder="Ingrese la cantiad de compradores" 
+    />
+  </div>
+
+  <div class="form-group pt-3">
+    <label for="boletas">X2:</label>
+    <input
+      [(ngModel)]="equis2" name="x2" value="x2" type="text" 
+      class="form-control" id="compradores" 
+      placeholder="Ingrese la cantiad de compradores" 
+    />
+  </div>
+  <div class="form-group pt-3">
+    <label for="boletas">Y2:</label>
+    <input
+      [(ngModel)]="ye2" name="y2" value="y2" type="text" 
+      class="form-control" id="compradores" 
+      placeholder="Ingrese la cantiad de compradores" 
+    />
+  </div>
+
+  <div class="pt-4">
+    <button (click)="calcular()" type="button" class="btn btn-primary">
+      Procesar
+    </button>
+  </div>
+</form>
+
+<div class="pt-4" *ngIf="resultado">
+  <h3>Resultado:</h3>
+  <p>{{ resultado }}</p>
+</div>

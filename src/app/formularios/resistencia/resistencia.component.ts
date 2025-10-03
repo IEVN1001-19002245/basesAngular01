@@ -7,26 +7,27 @@ import { OperacionesResistencia } from './operacionesResistencia';
   templateUrl: './resistencia.component.html',
   styleUrl: './resistencia.component.css'
 })
-export class ResistenciaComponent {
-  color1: string = '';
-  color2: string = '';
-  multiplicador: string = '';
-  tolerancia: string = '';
 
+export class ResistenciaComponent {
+  op = new OperacionesResistencia();  
+  bandas = this.op.getBandas();
+  tolerancias = this.op.getTolerancias();
+  banda1 = this.bandas[0];
+  banda2 = this.bandas[0];
+  banda3 = this.bandas[0];
+  tolerancia = this.tolerancias[0];
   resultado: any = null;
 
-  private calculadora: OperacionesResistencia = new OperacionesResistencia();
-
-  procesar() {
-    this.calculadora.setBandas(this.color1, this.color2, this.multiplicador, this.tolerancia);
-    this.resultado = this.calculadora.calcularValor();
+  calcular() {
+    this.resultado = this.op.calcular(this.banda1, this.banda2, this.banda3, this.tolerancia);
   }
 
-  limpiar() {
-    this.color1 = '';
-    this.color2 = '';
-    this.multiplicador = '';
-    this.tolerancia = '';
-    this.resultado = null;
+  estilo(color: string) {
+    return {
+      'background-color': this.op.getColorHex(color),
+      'color': color === 'blanco' ? '#000' : '#fff',
+      'padding': '4px',
+      'text-align': 'center'
+    };
   }
 }

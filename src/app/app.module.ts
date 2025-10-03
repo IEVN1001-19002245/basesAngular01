@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesListComponent } from './heroes/heroes-list/heroes-list.component';
@@ -9,6 +8,7 @@ import { HeroesFilterPipe } from './heroes/heroes-filter.pipe';
 import { OperasBasComponent } from './formularios/operas-bas/operas-bas.component';
 import { CinepolisComponent } from './formularios/cinepolis/cinepolis.component';
 import { ResistenciaComponent } from './formularios/resistencia/resistencia.component';
+import { DistanciaPuntosComponent } from './formularios/distancia-puntos/distancia-puntos.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { ResistenciaComponent } from './formularios/resistencia/resistencia.comp
     HeroesFilterPipe,
     OperasBasComponent,
     CinepolisComponent,
-    ResistenciaComponent
+    ResistenciaComponent,
+    DistanciaPuntosComponent
   ],
   imports: [
     BrowserModule,

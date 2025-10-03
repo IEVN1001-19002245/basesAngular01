@@ -1,61 +1,100 @@
 export class OperacionesResistencia {
-  private banda1: number = 0;
-  private banda2: number = 0;
-  private multiplicador: number = 1;
-  private tolerancia: number = 0;
 
-  colores: { [key: string]: number } = {
-    negro: 0,
-    marron: 1,
-    rojo: 2,
-    naranja: 3,
-    amarillo: 4,
-    verde: 5,
-    azul: 6,
-    violeta: 7,
-    gris: 8,
-    blanco: 9
-  };
-
-  multiplicadores: { [key: string]: number } = {
-    negro: 1,
-    marron: 10,
-    rojo: 100,
-    naranja: 1000,
-    amarillo: 10000,
-    verde: 100000,
-    azul: 1000000,
-    dorado: 0.1,
-    plateado: 0.01
-  };
-
-  tolerancias: { [key: string]: number } = {
-    marron: 0.01,
-    rojo: 0.02,
-    verde: 0.005,
-    azul: 0.0025,
-    violeta: 0.001,
-    gris: 0.0005,
-    dorado: 0.05,
-    plateado: 0.1
-  };
-
-  setBandas(color1: string, color2: string, mult: string, tol: string) {
-    this.banda1 = this.colores[color1];
-    this.banda2 = this.colores[color2];
-    this.multiplicador = this.multiplicadores[mult];
-    this.tolerancia = this.tolerancias[tol];
+  getBandas(): string[] {
+    return [
+      'negro', 'marron', 'rojo', 'naranja', 'amarillo',
+      'verde', 'azul', 'morado', 'gris', 'blanco'
+    ];
   }
 
-  calcularValor(): { valor: number, max: number, min: number } {
-    const base = (this.banda1 * 10 + this.banda2) * this.multiplicador;
-    const max = base + (base * this.tolerancia);
-    const min = base - (base * this.tolerancia);
+  getTolerancias(): string[] {
+    return ['dorado', 'plateado'];
+  }
 
+  getValor(color: string): number {
+    switch (color) {
+      case 'negro':
+         return 0;
+      case 'marron':
+         return 1;
+      case 'rojo':
+         return 2;
+      case 'naranja':
+         return 3;
+      case 'amarillo':
+         return 4;
+      case 'verde':
+         return 5;
+      case 'azul':
+         return 6;
+      case 'morado':
+         return 7;
+      case 'gris':
+         return 8;
+      case 'blanco':
+         return 9;
+      default:
+         return 0;
+    }
+  }
+
+  getMultiplicador(color: string): number {
+    return Math.pow(10, this.getValor(color));
+  }
+
+  getTolerancia(color: string): number {
+    switch (color) {
+      case 'dorado':
+         return 0.05;
+      case 'plateado':
+         return 0.10;
+      default:
+         return 0;
+    }
+  }
+
+  getColorHex(color: string): string {
+    switch (color) {
+      case 'negro':
+         return '#000000';
+      case 'marron':
+         return '#8B4513';
+      case 'rojo':
+         return '#FF0000';
+      case 'naranja':
+         return '#FFA500';
+      case 'amarillo':
+         return '#FFFF00';
+      case 'verde':
+         return '#008000';
+      case 'azul':
+         return '#0000FF';
+      case 'morado':
+         return '#800080';
+      case 'gris':
+         return '#808080';
+      case 'blanco':
+         return '#E8E8E8';
+      case 'dorado':
+         return '#FFD700';
+      case 'plateado':
+         return '#C0C0C0';
+      default:
+         return '#FFFFFF';
+    }
+  }
+
+  calcular(b1: string, b2: string, b3: string, tol: string) {
+    const base = (this.getValor(b1) * 10 + this.getValor(b2)) * this.getMultiplicador(b3);
+    const tolerancia = this.getTolerancia(tol);
     return {
-      valor: base,
-      max: max,
-      min: min
+      banda1: b1,
+      banda2: b2,
+      banda3: b3,
+      tolerancia: tol,
+      valorBase: base,
+      valorMax: base * (1 + tolerancia),
+      valorMin: base * (1 - tolerancia)
     };
   }
 }
